@@ -35,8 +35,7 @@ dependencies:
   http:
   flutter_polyline_points: 
   share:
-  flutter_credit_card: ^0.1.3 
-  smooth_star_rating: 1.0.4+2
+  flutter_credit_card: ^0.1.3
   
 
 
