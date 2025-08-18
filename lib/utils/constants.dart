@@ -7,5 +7,5 @@ class Constatnts {
 
   static final String baseUrl =
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
-  static final String API_KEY = 'AIzaSyCDJa_D_Ewcm8wE8OAH6uBQttSxALdoNUI';
+  static final String API_KEY = 'AIzaSyCZG0I900z6zYpgIkwipPIgqX6P5xbyBj0';
 }
