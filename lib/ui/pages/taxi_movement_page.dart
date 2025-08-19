@@ -47,7 +47,7 @@ class _TaxiMovementPageState extends State<TaxiMovementPage> {
 
   @override
   void dispose() {
-    _demoTimer.cancel();
+    _demoTimer?.cancel();
     super.dispose();
   }
 
@@ -214,7 +214,7 @@ class _TaxiMovementPageState extends State<TaxiMovementPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: !_hasTripEnded ? Constatnts.primaryColor : Colors.red,
+        backgroundColor: !_hasTripEnded ? Constants.primaryColor : Colors.red,
         onPressed: () {
           !_hasTripEnded
               ? updatePolyLinePoints()

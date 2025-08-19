@@ -12,7 +12,7 @@ class SupportPage extends StatelessWidget {
       children: <Widget>[
         Icon(
           iconData,
-          color: Constatnts.primaryColor,
+          color: Constants.primaryColor,
         ),
         SizedBox(
           width: 20,

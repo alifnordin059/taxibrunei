@@ -65,7 +65,7 @@ class _AddCreditCardPageState extends State<AddCreditCardPage> {
                       child: SingleChildScrollView(
                         child: CreditCardForm(
                           onCreditCardModelChange: onCreditCardModelChange,
-                          themeColor: Constatnts.primaryColor,
+                          themeColor: Constants.primaryColor,
                         ),
                       ),
                     )

@@ -13,7 +13,7 @@ class GoogleMapServices {
         'https://maps.googleapis.com/maps/api/place/autocomplete/json';
     String type = 'establishment';
     String url =
-        '$baseUrl?input=$query&key=${Constatnts.API_KEY}&type=$type&language=en&components=country:ng&sessiontoken=$sessionToken';
+        '$baseUrl?input=$query&key=${Constants.API_KEY}&type=$type&language=en&components=country:ng&sessiontoken=$sessionToken';
 
     print('Autocomplete(sessionToken): $sessionToken');
 
@@ -35,7 +35,7 @@ class GoogleMapServices {
     final String baseUrl =
         'https://maps.googleapis.com/maps/api/place/details/json';
     String url =
-        '$baseUrl?key=${Constatnts.API_KEY}&place_id=$placeId&language=en&sessiontoken=$token';
+        '$baseUrl?key=${Constants.API_KEY}&place_id=$placeId&language=en&sessiontoken=$token';
 
     print('Place Detail(sessionToken): $sessionToken');
     final http.Response response = await http.get(url);

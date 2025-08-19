@@ -49,7 +49,7 @@ class PromoCodePage extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: CustomStyles.cardBoldDarkTextStyle,
                           autofocus: true,
-                          cursorColor: Constatnts.primaryColor,
+                          cursorColor: Constants.primaryColor,
                         ),
                         SizedBox(
                           height: 10,

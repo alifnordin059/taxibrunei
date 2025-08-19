@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Constatnts {
+class Constants {
   static final String logo = "assets/images/logo.png";
   static final String bgleaf = "assets/images/bg_leaf.png";
   static final Color primaryColor = Colors.green;
