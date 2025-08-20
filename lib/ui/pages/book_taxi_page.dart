@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -148,7 +149,7 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
     polylineCoordinates.clear();
     _polylines.clear();
     List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
-        Constatnts.API_KEY,
+        Constants.API_KEY,
         _fromPlaceDetail.lat,
         _fromPlaceDetail.lng,
         _toPlaceDetail.lat,
@@ -228,29 +229,32 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
   }
 
   void getLatLngBounds(LatLng from, LatLng to) {
-    if (from.latitude > to.latitude && from.longitude > to.longitude) {
-      bound = LatLngBounds(southwest: to, northeast: from);
-    } else if (from.longitude > to.longitude) {
-      bound = LatLngBounds(
-          southwest: LatLng(from.latitude, to.longitude),
-          northeast: LatLng(to.latitude, from.longitude));
-    } else if (from.latitude > to.latitude) {
-      bound = LatLngBounds(
-          southwest: LatLng(to.latitude, from.longitude),
-          northeast: LatLng(from.latitude, to.longitude));
-    } else {
-      bound = LatLngBounds(southwest: from, northeast: to);
-    }
+    double minLat = math.min(from.latitude, to.latitude);
+    double maxLat = math.max(from.latitude, to.latitude);
+    double minLng = math.min(from.longitude, to.longitude);
+    double maxLng = math.max(from.longitude, to.longitude);
+    
+    bound = LatLngBounds(
+      southwest: LatLng(minLat, minLng),
+      northeast: LatLng(maxLat, maxLng),
+    );
   }
 
-  void check(CameraUpdate u, GoogleMapController c) async {
+  void check(CameraUpdate u, GoogleMapController c, [int attempts = 0]) async {
+    if (attempts >= 3) {
+      // Maximum attempts reached, stop recursion
+      return;
+    }
+    
     c.animateCamera(u);
+    await Future.delayed(Duration(milliseconds: 100)); // Add small delay
     LatLngBounds l1 = await c.getVisibleRegion();
     LatLngBounds l2 = await c.getVisibleRegion();
     print(l1.toString());
     print(l2.toString());
-    if (l1.southwest.latitude == -90 || l2.southwest.latitude == -90)
-      check(u, c);
+    if (l1.southwest.latitude == -90 || l2.southwest.latitude == -90) {
+      check(u, c, attempts + 1);
+    }
   }
 
   void _clearCordinate() {
@@ -466,7 +470,7 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
               child: ListTile(
                 leading: Icon(
                   FontAwesomeIcons.user,
-                  color: Constatnts.primaryColor,
+                  color: Constants.primaryColor,
                   size: 40,
                 ),
                 title: Text(
@@ -515,7 +519,7 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
                           margin: const EdgeInsets.all(15.0),
                           elevation: 10,
                           color: _selectedIndex == ridesOptions[index].index
-                              ? Constatnts.primaryColor
+                              ? Constants.primaryColor
                               : Colors.white,
                           child: Container(
                             child: Container(
@@ -616,7 +620,7 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    color: Constatnts.primaryColor,
+                    color: Constants.primaryColor,
                     onPressed: () {
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
@@ -625,6 +629,7 @@ class _BookTaxiPageState extends State<BookTaxiPage> {
                           toPlaceDetail: _toPlaceDetail,
                           polylines: _polylines,
                           polylineCoordinates: polylineCoordinates,
+                          bound: bound,
                         );
                       }));
                     },

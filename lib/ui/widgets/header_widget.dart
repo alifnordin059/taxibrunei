@@ -16,7 +16,7 @@ class HeaderWidget extends StatelessWidget {
           child: Container(
             width: 200,
             child: Image.asset(
-              Constatnts.logo,
+              Constants.logo,
               height: 100,
             ),
           ),

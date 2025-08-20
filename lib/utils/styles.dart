@@ -70,7 +70,7 @@ class CustomStyles {
 
   static final cardBoldDarkTextStyleGreen = GoogleFonts.poppins(
     textStyle: TextStyle(
-      color: Constatnts.primaryColor,
+      color: Constants.primaryColor,
       fontSize: 12,
       fontWeight: FontWeight.w700,
     ),

@@ -22,7 +22,7 @@ class DrawerWidget extends StatelessWidget {
           ListTile(
             leading: Icon(
               FontAwesomeIcons.user,
-              color: Constatnts.primaryColor,
+              color: Constants.primaryColor,
               size: 40,
             ),
             title: Text(
